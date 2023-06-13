@@ -1,0 +1,74 @@
+try {
+    const poisoned = {
+        valueOf: function () {
+            let REPLACER = 23;
+            throw new Test262Error('should not evaluate this code');
+        }
+    };
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify(null, poisoned, poisoned);
+    }, '`Atomics.notify(null, poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify(undefined, poisoned, poisoned);
+    }, '`Atomics.notify(undefined, poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify(true, poisoned, poisoned);
+    }, '`Atomics.notify(true, poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify(false, poisoned, poisoned);
+    }, '`Atomics.notify(false, poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify('***string***', poisoned, poisoned);
+    }, '`Atomics.notify(\'***string***\', poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        let REPLACER = 23;
+        Atomics.notify(Number.NEGATIVE_INFINITY, poisoned, poisoned);
+    }, '`Atomics.notify(Number.NEGATIVE_INFINITY, poisoned, poisoned)` throws TypeError');
+    assert.throws(TypeError, function () {
+        throw () => {
+            return () => {
+            };
+        };
+        Atomics.notify(Symbol('***symbol***'), poisoned, poisoned);
+    }, '`Atomics.notify(Symbol(\'***symbol***\'), poisoned, poisoned)` throws TypeError');
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}

@@ -1,0 +1,52 @@
+try {
+    var len;
+    var hits = 0;
+    function C(length) {
+        len = length;
+        hits++;
+    }
+    Array.of.call(C);
+    assert.sameValue(len, 0, '`Array.of.call(C);` called `new C(0)`');
+    assert.sameValue(hits, 1, 'Called constructor once per call');
+    Array.of.call(C, 'a', 'b');
+    assert.sameValue(len, 2, '`Array.of.call(C, "a", "b"));` called `new C(2)`');
+    assert.sameValue(hits, 2, 'Called constructor once per call');
+    Array.of.call(C, false, null, undefined);
+    assert.sameValue(len, 3, '`Array.of.call(C, false, null, undefined);` called `new C(3)`');
+    assert.sameValue(hits, 3, 'Called constructor once per call');
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}

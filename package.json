@@ -1,0 +1,41 @@
+{
+  "name": "analysis",
+  "version": "1.0.0",
+  "description": "Intercepting the main program objects is done Logging is done:         the general results can be found in ./test/General results.txt         the detailed final result can be found in ./test/results.csv Analysing function invocation is still under process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "@locker/near-membrane-dom": "0.7.3",
+    "@locker/near-membrane-node": "0.7.3",
+    "acorn": "^8.7.0",
+    "canvas": "^2.8.0",
+    "csvsync": "^1.3.2",
+    "delay": "^5.0.0",
+    "directory-tree": "^2.2.9",
+    "escodegen": "^2.0.0",
+    "esprima": "^4.0.1",
+    "estraverse": "^5.2.0",
+    "fast-csv": "^4.3.6",
+    "jsdom": "17.0.0",
+    "notevil": "1.3.3",
+    "object-to-csv": "^1.0.5",
+    "objects-to-csv": "^1.3.6",
+    "package.json": "^2.0.1",
+    "puppeteer": "^13.2.0",
+    "realms-shim": "1.2.2",
+    "safe-eval": "0.4.1",
+    "ses": "0.14.3",
+    "vega-cli": "^5.21.0",
+    "vega-lite": "^5.2.0",
+    "vm2": "3.9.3"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

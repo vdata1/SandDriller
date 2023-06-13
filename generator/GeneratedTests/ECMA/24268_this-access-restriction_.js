@@ -1,0 +1,159 @@
+try {
+    class Base {
+    }
+    (function () {
+        class C extends Base {
+            constructor() {
+                var y;
+                super();
+            }
+        }
+        ;
+        new C();
+    }());
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super(this.x);
+            }
+        }
+        ;
+        new C();
+    });
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super(this);
+            }
+        }
+        ;
+        new C();
+    });
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super.method();
+                super(this);
+            }
+        }
+        ;
+        new C();
+    });
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super(super.method());
+            }
+        }
+        ;
+        new C();
+    });
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super(super());
+            }
+        }
+        ;
+        new C();
+    });
+    assert.throws(ReferenceError, function () {
+        class C extends Base {
+            constructor() {
+                super(1, 2, Object.getPrototypeOf(this));
+            }
+        }
+        ;
+        new C();
+    });
+    (function () {
+        class C extends Base {
+            constructor() {
+                {
+                    super(1, 2);
+                }
+            }
+        }
+        ;
+        new C();
+    }());
+    (function () {
+        class C extends Base {
+            constructor() {
+                if (1)
+                    super();
+            }
+        }
+        ;
+        new C();
+    }());
+    class C1 extends Object {
+        constructor() {
+            'use strict';
+            super();
+        }
+    }
+    ;
+    new C1();
+    class C2 extends Object {
+        constructor() {
+            ;
+            'use strict';
+            ;
+            ;
+            ;
+            ;
+            super();
+        }
+    }
+    ;
+    new C2();
+    class C3 extends Object {
+        constructor() {
+            ;
+            'use strict';
+            ;
+            ;
+            ;
+            ;
+            super();
+        }
+    }
+    ;
+    new C3();
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}

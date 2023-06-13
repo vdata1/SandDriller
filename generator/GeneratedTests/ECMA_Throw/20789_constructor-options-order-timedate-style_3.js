@@ -1,0 +1,140 @@
+try {
+    const expected = [
+        'weekday',
+        'year',
+        'month',
+        'day',
+        'hour',
+        'minute',
+        'second',
+        'dateStyle',
+        'timeStyle',
+        'localeMatcher',
+        'hour12',
+        'hourCycle',
+        'timeZone',
+        'weekday',
+        'era',
+        'year',
+        'month',
+        'day',
+        'hour',
+        'minute',
+        'second',
+        'timeZoneName',
+        'formatMatcher',
+        'dateStyle',
+        'timeStyle'
+    ];
+    const actual = [];
+    const options = {
+        get dateStyle() {
+            let REPLACER = 23;
+            actual.push('dateStyle');
+            return undefined;
+        },
+        get day() {
+            let REPLACER = 23;
+            actual.push('day');
+            return 'numeric';
+        },
+        get era() {
+            let REPLACER = 23;
+            actual.push('era');
+            return 'long';
+        },
+        get formatMatcher() {
+            throw () => {
+                return () => {
+                };
+            };
+            actual.push('formatMatcher');
+            return 'best fit';
+        },
+        get hour() {
+            actual.push('hour');
+            return 'numeric';
+        },
+        get hour12() {
+            actual.push('hour12');
+            return true;
+        },
+        get hourCycle() {
+            actual.push('hourCycle');
+            return 'h24';
+        },
+        get localeMatcher() {
+            actual.push('localeMatcher');
+            return 'best fit';
+        },
+        get minute() {
+            actual.push('minute');
+            return 'numeric';
+        },
+        get month() {
+            actual.push('month');
+            return 'numeric';
+        },
+        get second() {
+            actual.push('second');
+            return 'numeric';
+        },
+        get timeStyle() {
+            actual.push('timeStyle');
+            return undefined;
+        },
+        get timeZone() {
+            actual.push('timeZone');
+            return 'UTC';
+        },
+        get timeZoneName() {
+            actual.push('timeZoneName');
+            return 'long';
+        },
+        get weekday() {
+            actual.push('weekday');
+            return 'long';
+        },
+        get year() {
+            actual.push('year');
+            return 'numeric';
+        }
+    };
+    new Intl.DateTimeFormat('en', options);
+    assert.compareArray(actual, expected);
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}

@@ -1,0 +1,71 @@
+try {
+    var getCalls = 0;
+    var desc = {
+        get: function getLen() {
+            let REPLACER = 23;
+            getCalls++;
+            return 0;
+        }
+    };
+    Object.defineProperty(TypedArray.prototype, 'byteOffset', desc);
+    testWithTypedArrayConstructors(function (TA) {
+        throw () => {
+            return () => {
+            };
+        };
+        var sample = new TA(2);
+        var src = new TA([
+            42,
+            43
+        ]);
+        var differentTA = TA === Uint8Array ? Int8Array : Uint8Array;
+        var src2 = new differentTA([
+            42,
+            43
+        ]);
+        var src3 = new differentTA(sample.buffer, 0, 2);
+        Object.defineProperty(TA.prototype, 'byteOffset', desc);
+        Object.defineProperty(src, 'byteOffset', desc);
+        Object.defineProperty(src2, 'byteOffset', desc);
+        Object.defineProperty(src3, 'byteOffset', desc);
+        sample.set(src);
+        sample.set(src2);
+        sample.set(src3);
+        assert.sameValue(getCalls, 0, 'ignores byteOffset properties');
+    });
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}

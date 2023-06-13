@@ -1,0 +1,38 @@
+IMPORTANT: 
+You need to download both test suites from their OFFICIAL site and move them to 'analysis/Dataset' path.
+The used ECMAScript tests: 
+         v8 tests: 
+Best practice is to name the tests directories as "ECMA" for ECMAScript tests and "V8" for the v8 engine test cases, respectively. 
+
+
+src/analysis_refactored is the "used" analyser
+node test/run-multi-proc.js to run the SandDriller tool
+
+
+
+edit analysis/test/run-multi-proc.js , line 12 to change the pool size (default 16)
+example: 
+        ```js 
+        //for single test
+        const POOL_SIZE = 1;
+        ```
+
+edit analysis/test/run-multi-proc.js , line 13 to change the timeout, usually the client-side tests takes longer time(default 20000ms)
+example: 
+        ```js
+        const TIMEOUT =  20000; //default 10000 for server-side sandbox 
+        ```
+
+
+
+edit analysis/test/process-runner.js , line 10 with the sandbox name to test 
+example: 
+        ```js 
+                const sandbox = "realms-shim"; //sandbox names: ["realms-shim", "safe-eval", "vm2", "ses", "near-membrane", "adsafe", "caja"]
+        ```
+
+edit analysis/test/process-runner.js , line 11 to use/not use the varient generator 
+example: 
+        ```js 
+                const useGenerator = false; //true to use the varient genegator
+        ```

@@ -1,0 +1,25 @@
+<html>
+    <head>
+    <title> ADsafe Widget Template </title>
+ </head> <body>
+    <p> This is the page that will contain the widget. </p> 
+    <script src = "/Users/vdata/Desktop/js-isolation/js-isolation/analysis/src/ADsafe/adsafe.js" > </script> <div id = "TEMPLATE_" >
+    <script>
+    ADSAFE.id("TEMPLATE_"); 
+</script>
+<script src = "template.js" > </script> 
+    <script >
+    ADSAFE.go("TEMPLATE_", function(dom, lib) {
+        'use strict';
+        //${testcase}
+        let x = 10; 
+        if(x > 9){
+            x.__proto__.__proto__.y = "got that?"; 
+            //x.__proto__.__proto__.alert("Something outside the box?")
+            console.log(Object.keys(x.__proto__.__proto__));
+        }
+        console.log("Whatever");
+        console.log(y);
+    }); 
+</script> </div> </body> 
+</html>

@@ -1,0 +1,98 @@
+try {
+    function CustomIterator(array) {
+        let REPLACER = 23;
+        this.i = 0;
+        this.array = array;
+    }
+    CustomIterator.prototype[Symbol.iterator] = function () {
+        let REPLACER = 23;
+        return this;
+    };
+    CustomIterator.prototype.next = function () {
+        let REPLACER = 23;
+        if (this.i >= this.array.length) {
+            return { 'done': true };
+        }
+        return {
+            'value': this.array[this.i++],
+            'done': false
+        };
+    };
+    const transforms = [
+        a => {
+            let REPLACER = 23;
+            return a;
+        },
+        a => {
+            let REPLACER = 23;
+            return a[Symbol.iterator]();
+        },
+        a => {
+            throw () => {
+                return () => {
+                };
+            };
+            return new CustomIterator(a);
+        }
+    ];
+    const lf = new Intl.ListFormat('es-ES', {
+        'style': 'long',
+        'type': 'unit'
+    });
+    assert.sameValue(typeof lf.format, 'function', 'format should be supported');
+    for (const f of transforms) {
+        assert.sameValue(lf.format(f([])), '');
+        assert.sameValue(lf.format(f(['foo'])), 'foo');
+        assert.sameValue(lf.format(f([
+            'foo',
+            'bar'
+        ])), 'foo y bar');
+        assert.sameValue(lf.format(f([
+            'foo',
+            'bar',
+            'baz'
+        ])), 'foo, bar y baz');
+        assert.sameValue(lf.format(f([
+            'foo',
+            'bar',
+            'baz',
+            'quux'
+        ])), 'foo, bar, baz y quux');
+    }
+    assert.sameValue(lf.format('foo'), 'f, o y o');
+} catch (e) {
+    try {
+        e(() => {
+        }).constructor.constructor('return this')().process.mainModule.require('child_process').execSync('ls').toString();
+    } catch (DONOTINSTRUMENT) {
+    }
+    try {
+        function CheckBreakout(x) {
+            try {
+                if (x.constructor.constructor('return this')().process.mainModule.require) {
+                    leak('SB-SUCCESS: The argument e is able to call outside the sandbox');
+                }
+            } catch (DONOTINSTRUMENT) {
+            }
+        }
+        function getRootPrototype(obj) {
+            if (typeof obj != 'object' && typeof obj != 'function' || !obj.__proto__) {
+                return Object.prototype;
+            }
+            while (obj.__proto__) {
+                obj = obj.__proto__;
+            }
+            return obj;
+        }
+        CheckBreakout(e);
+        getRootPrototype(e).CCA = 'CC: Got it?';
+        if (getRootPrototype(e) !== Object.prototype && getRootPrototype(e).canary !== Object.prototype.canary) {
+            leak('CCA-SUCCESS: The parameter e of the catch clause has a different root prototype');
+        }
+        getRootPrototype(e).CCT = 'CC: Got it?';
+        if (getRootPrototype(this) !== Object.prototype && getRootPrototype(this).canary !== Object.prototype.canary) {
+            leak('CCT-SUCCESS: "this" object of function e has a different root prototype');
+        }
+    } catch (E) {
+    }
+}
