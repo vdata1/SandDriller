@@ -130,8 +130,9 @@ const walk = function(dir) {
 };
 
 let entries = [];
+    entries = ['/Users/vdata/Desktop/github_SandDriller/Dataset/ECMA/built-ins/String/prototype/match/invoke-builtin-match.js']
     // entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/ECMA/")));
-    entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/V8/")));
+    //entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/V8/")));
     
     //crashes with vm2 node v14.15.3
     // entries = ['../Dataset/V8/regress/regress-11491.js']
