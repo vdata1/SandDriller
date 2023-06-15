@@ -9,8 +9,8 @@ const { ConsoleMessage } = require("puppeteer");
 
 global.Tout = false;
 
-const POOL_SIZE = 16; //1 for a single test or testing the client-side;
-const TIMEOUT =  20000; //10000 for server-side sandbox
+const POOL_SIZE = 1; //1 for a single test or testing the client-side; 16 for others.
+const TIMEOUT =  10000; //10000 for server-side sandbox, 20000 for client-side sandbox.
 const OUT_DIR = "/tmp/res";
 
 function writeCSV(data){
@@ -130,29 +130,30 @@ const walk = function(dir) {
 };
 
 let entries = [];
-    entries = ['/Users/vdata/Desktop/github_SandDriller/Dataset/ECMA/built-ins/String/prototype/match/invoke-builtin-match.js']
+    
+
+    //entries = entries.concat(walk("/Users/vdata/Desktop/github_SandDriller/Dataset/V8/regress"));
+    
+    /* For Functional padge */ 
+    entries = ['../Dataset/V8/regress/regress-444805.js-script']
+    
+    /* For E1 */ 
+    //entries = ["../Dataset/V8/regress/regress-746909.js"]
+    
+    /* For E2 */
+    //entries = ["../Dataset/V8/regress/regress-1591.js"]
+
+    /* For E3 */
+    //entries = walk("../Dataset/V8");
+
+    /* For E4 */
+    //crashes with vm2 node v14.15.3
+    //entries = ['../Dataset/V8/regress/regress-11491.js']
+    
+    /* To run all testcases */
     // entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/ECMA/")));
     //entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/V8/")));
     
-    //crashes with vm2 node v14.15.3
-    // entries = ['../Dataset/V8/regress/regress-11491.js']
-    
-    //
-    // entries = ['../Dataset/V8/regress/regress-crbug-548580.js']
-    // entries = ['../Dataset/ECMA/annexB/built-ins/Date/prototype/setYear/this-time-valid.js']
-    //entries = [entries[3842], '../Dataset/ECMA/built-ins/Array/proto-from-ctor-realm-one.js'];
-
-
-    //ECMA
-    // '../Dataset/ECMA/built-ins/RegExp/prototype/Symbol.matchAll/isregexp-called-once.js',
-    // '../Dataset/ECMA/built-ins/RegExp/prototype/Symbol.split/last-index-exceeds-str-size.js',
-    // '../Dataset/ECMA/built-ins/RegExpStringIteratorPrototype/next/custom-regexpexec-get-throws.js',
-    // '../Dataset/ECMA/built-ins/RegExpStringIteratorPrototype/next/custom-regexpexec-match-get-0-tostring.js',
-    // '../Dataset/ECMA/built-ins/String/prototype/match/invoke-builtin-match.js',
-    // '../Dataset/ECMA/language/expressions/dynamic-import/usage-from-eval.js',
-    // '../Dataset/ECMA/language/expressions/assignmenttargettype/direct-lefthandsideexpression-coalesce-assignment-assignmentexpression-0.js',
-
-
 console.log("To run " + entries.length);
 
 process
