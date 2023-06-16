@@ -1,4 +1,5 @@
 let code = `
+/* DELETE HERE
 let global = this;
 let Test262Error = Error;
 function isGetter(obj, prop) {
@@ -117,10 +118,15 @@ function checkReferenceRecursive(ref, cb) {
         checkBreakout(refs[i].val, refs[i].path);
     }
 }
+*/
 try {
+/* DELETE HERE
     var stack;
     var used_custom_lookup = false;
-    global.temp0 = {
+    global.temp0 = 
+*/
+    {
+    /* DELETE HERE
         __lookupGetter__: function () {
             if (typeof arguments !== 'undefined' && arguments.length > 0) {
                 checkReferenceRecursive(arguments, (root, path) => {
@@ -153,7 +159,9 @@ try {
                 });
             used_custom_lookup = true;
         },
+    */
         test: function () {
+        /* DELETE HERE   
             if (typeof arguments !== 'undefined' && arguments.length > 0) {
                 checkReferenceRecursive(arguments, (root, path) => {
                     try {
@@ -183,7 +191,12 @@ try {
                     }
                     leak('FET-SUCCESS: The property ' + path + ' of this in function anonymous27 has a different root prototype [line 8]');
                 });
+         */       
             throw function thrower() {
+        /* INSERT THIS CODE HERE:
+        this.__proto__.polluted = "polluted: Got it?";
+        */         
+        /* DELETE HERE
                 if (typeof arguments !== 'undefined' && arguments.length > 0) {
                     checkReferenceRecursive(arguments, (root, path) => {
                         try {
@@ -245,7 +258,9 @@ try {
                         });
                     return this;
                 };
+            */
             };
+        /* DELETE HERE
             try {
                 global.temp1 = f(), function functionInvocationAnalysis(r) {
                     let grtA = getRootPrototype(r);
@@ -287,7 +302,10 @@ try {
                 stack = err.stack;
             }
         }
-    }.test(), function functionInvocationAnalysis(r) {
+    */    
+    }.test()
+    /* DELETE HERE
+    , function functionInvocationAnalysis(r) {
         let grtA = getRootPrototype(r);
         if (grtA !== Object.__proto__) {
             try {
@@ -363,7 +381,12 @@ try {
             leak('FIA-SUCCESS: The property ' + path + ' of the result of function annonymous has a different root prototype [line 23]');
         });
     }(temp4), global.temp4;
+ */   
 } catch (e) {
+   /* INSERT THIS CODE HERE: 
+   e();
+   */
+  /* DELETE HERE
     checkBreakout(e);
     if (getRootPrototype(e) !== Object.__proto__) {
         try {
@@ -450,6 +473,7 @@ try {
             leak('CCA-SUCCESS: The property ' + path + ' of parameter e of the catch clause has a different root prototype [line 28]');
         });
     }
+    */
 }
 `; 
 

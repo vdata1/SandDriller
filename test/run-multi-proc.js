@@ -135,7 +135,7 @@ let entries = [];
     //entries = entries.concat(walk("/Users/vdata/Desktop/github_SandDriller/Dataset/V8/regress"));
     
     /* For Functional padge */ 
-    entries = ['../Dataset/V8/regress/regress-444805.js-script']
+    //entries = ['../Dataset/V8/regress/regress-444805.js-script']
     
     /* For E1 */ 
     //entries = ["../Dataset/V8/regress/regress-746909.js"]
