@@ -1,3 +1,4 @@
+# Artifact "SANDDRILLER: A Fully-Automated Approach for Testing Language-Based JavaScript Sandboxes"
 This repo is the implementation of our paper, SandDriller: A Fully-Automated Approach for Testing Language-Based JavaScript Sandboxes. 
 The paper is available [here](https://www.usenix.org/conference/usenixsecurity23/presentation/alhamdan)
 
@@ -16,8 +17,6 @@ The used version of our experiments:  ECMAScript tests: https://github.com/tc39/
                                       v8 tests: https://github.com/nodejs/node/tree/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/deps/v8/test/mjsunit
 
 Best practice is to name the tests directories as "ECMA" for ECMAScript tests and "V8" for the v8 engine test cases, respectively. 
-
-
 
 
 USE command `$ node ${PATH_TO_PROJECT}/test/run-multi-proc.js` to run the SandDriller tool
