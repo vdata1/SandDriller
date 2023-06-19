@@ -14,7 +14,7 @@ The associated artifact describes how to run the tool and interpret the results.
 ```
 
 ## Requirements
-We performed the experiments described in the paper on a server with 64 Intel Xeon E5-4650L@2.60GHz CPU cores and 768GB of memory. However, SandDriller does not require specific hardware features, so it can successfully run on other hardware configurations. To replicate the experiments in the artifact, we require Node.js version 14.15 on Linux, but we successfully run SandDriller in other setups, as well.1
+We performed the experiments described in the paper on a server with 64 Intel Xeon E5-4650L with 2.60GHz CPU cores and 768GB of memory. However, SandDriller does not require specific hardware features, so it can successfully run on other hardware configurations. To replicate the experiments in the artifact, we require Node.js version 14.15 on Linux, but we successfully run SandDriller in other setups, as well.1
 
 ## Installation
 After cloning the repository, use npm to install all the third-party dependencies in `package.json` by running in the main folder of the project:
