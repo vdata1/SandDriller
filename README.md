@@ -42,17 +42,17 @@ To run SandDriller, execute from the main folder of the project:
 node test/run-multi-proc.js
 ```
 
-A summary of the test results will be printed on the screen and the detailed results can be inspected in `$PATH_TO_SANDDRILLER/Results/`. For each security violation, SandDriller outputs the offending instrumented test cases in the `/tmp/res` folder.
+A summary of the test results will be printed on the screen and the detailed results can be inspected in `${PATH_TO_SANDDRILLER}/Results/`. For each security violation, SandDriller outputs the offending instrumented test cases in the `/tmp/res` folder. By default, SandDriller runs with a toy corpus containing three JS files and it should produce two security violations and a hard crash.
         
 ## Configuration options
 There are several configuration options that can be tweaked to control SandDriller's execution:
 
-* **Target sandbox**: Edit `${PATH_TO_PROJECT}/test/process-runner.js` , line 10 with the name of the sandbox under test, e.g.,: 
+* **Target sandbox**: Edit `${PATH_TO_SANDDRILLER}/test/process-runner.js` , line 10 with the name of the sandbox under test, e.g.,: 
 ```js 
 const sandbox = "realms-shim"; //sandbox names: ["realms-shim", "safe-eval", "vm2", "ses", "near-membrane", "adsafe", "caja"]
 ```
 
-* **Corpus**: The variable `entries` declared in line 132 of `${PATH_TO_PROJECT}/test/run-multi-proc.js` should contain the input corpus used by SandDriller. One can either declare it using individual paths: 
+* **Corpus**: The variable `entries` declared in line 132 of `${PATH_TO_SANDDRILLER}/test/run-multi-proc.js` should contain the input corpus used by SandDriller. One can either declare it using individual paths: 
 ```js
 entries = [path.resolve(__dirname, "../Dataset/V8/regress/regress-444805.js-script")]
 ```
@@ -61,19 +61,19 @@ or by using the convenient `walk()` method to include all files in a directory t
 entries = walk(path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit"));
 ```
 
-* **Number of parallel worker threads**: Edit `${PATH_TO_PROJECT}/test/run-multi-proc.js` , line 12 to change the pool size (default 16) example: 
+* **Number of parallel worker threads**: Edit `${PATH_TO_SANDDRILLER}/test/run-multi-proc.js` , line 12 to change the pool size (default 16) example: 
 ```js 
 //for a single test or testing the client-side sandboxes
 const POOL_SIZE = 1;
 ```
 
-* **Timeout for a single test**: Edit `${PATH_TO_PROJECT}/test/run-multi-proc.js` , line 13 to change the timeout, usually the client-side tests takes longer time(default 20000ms)
+* **Timeout for a single test**: Edit `${PATH_TO_SANDDRILLER}/test/run-multi-proc.js` , line 13 to change the timeout, usually the client-side tests takes longer time(default 20000ms)
 example: 
 ```js
 const TIMEOUT =  20000; //default 10000 for server-side sandbox 
 ```
 
-* **Enable/disable variant generator**: Edit `${PATH_TO_PROJECT}/test/process-runner.js` , line 11 to use/not use the variant generator: 
+* **Enable/disable variant generator**: Edit `${PATH_TO_SANDDRILLER}/test/process-runner.js` , line 11 to use/not use the variant generator: 
 ```js 
 const useGenerator = false; //true to use the varient genegator
 ```
