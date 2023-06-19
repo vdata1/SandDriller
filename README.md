@@ -23,7 +23,7 @@ After cloning the repository, use npm to install all the third-party dependencie
 npm --prefix . install .
 ```
 
-Note that the vulnerable version of vm2 sandbox used in the artifact evaluation is alread defined as dependency so you do not need to install it separately. To download and test other sandboxes, e.g., AdSafe or realms-shimt, we recommend downloading these sandboxes from their official resources (GitHub repository or npm) and build them and ensure they are accessible to SandDriller.
+Note that the vulnerable version of `vm2` and `safe-eval` sandboxes used in the artifact evaluation are alread defined as dependency, so you do not need to install them separately. To download and test other sandboxes, e.g., `AdSafe` or `realms-shim`, we recommend downloading these sandboxes from their official resources (GitHub repository or npm) and ensure they are accessible to SandDriller, i.e., they can be directly imported using the `require()` statement.
 
 To download the corpus used in the artifact evaluation (V8 tests), run the following commands: 
 
