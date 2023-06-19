@@ -25,7 +25,7 @@ npm --prefix . install .
 
 Note that the vulnerable version of vm2 sandbox used in the artifact evaluation is alread defined as dependency so you do not need to install it separately. To download and test other sandboxes, e.g., AdSafe or realms-shimt, we recommend downloading these sandboxes from their official resources (GitHub repository or npm) and build them and ensure they are accessible to SandDriller.
 
-To download the corpus used in the artifact evaluation (ECMAScript), run the following commands: 
+To download the corpus used in the artifact evaluation (V8 tests), run the following commands: 
 
 ```
 cd Dataset

@@ -1,1 +1,1 @@
-test suites must be in this directory. 
+The input corpora must be in this directory. 
