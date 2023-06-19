@@ -129,32 +129,23 @@ const walk = function(dir) {
     return results;
 };
 
-let entries = [];
-    
+    let entries = [];
 
-    //entries = entries.concat(walk("/Users/vdata/Desktop/github_SandDriller/Dataset/V8/regress"));
+    entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit/")));
     
     /* For Functional padge */ 
-    //entries = ['../Dataset/V8/regress/regress-444805.js-script']
+    //entries = ['../Dataset/node/deps/v8/test/mjsunit/regress/regress-444805.js-script']
     
     /* For E1 */ 
-    //entries = ["../Dataset/V8/regress/regress-746909.js"]
+    //entries = ["../Dataset/node/deps/v8/test/mjsunit/regress/regress-746909.js"]
     
     /* For E2 */
-    //entries = ["../Dataset/V8/regress/regress-1591.js"]
+    //entries = ["../Dataset/node/deps/v8/test/mjsunit/regress/regress-1591.js"]
 
     /* For E3 */
-    //entries = walk("../Dataset/V8");
-
-    /* For E4 */
-    //crashes with vm2 node v14.15.3
-    //entries = ['../Dataset/V8/regress/regress-11491.js']
-    
-    /* To run all testcases */
-    // entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/ECMA/")));
-    //entries = entries.concat(walk(path.resolve(__dirname, "../Dataset/V8/")));
-    
-console.log("To run " + entries.length);
+    //entries = walk("../Dataset/node/deps/v8/test/mjsunit");
+   
+    console.log("To run " + entries.length);
 
 process
     .on('unhandledRejection', (reason, p) => {
