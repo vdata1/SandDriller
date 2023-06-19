@@ -7,7 +7,7 @@ const fs = require("fs");
 const base = require("./BaseFunctions.js");
 const { CONNREFUSED } = require("dns");
 
-const sandbox = "realms-shim";
+const sandbox = "vm2";
 const useGenerator = false; //change to 'true' if you want to use varient generator
 const maxVariants = 5;
 

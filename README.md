@@ -17,7 +17,7 @@ The associated artifact describes how to run the tool and interpret the results.
 We performed the experiments described in the paper on a server with 64 Intel Xeon E5-4650L@2.60GHz CPU cores and 768GB of memory. However, SandDriller does not require specific hardware features, so it can successfully run on other hardware configurations. To replicate the experiments in the artifact, we require Node.js version 14.15 on Linux, but we successfully run SandDriller in other setups, as well.1
 
 ## Installation
-After cloning the repository, use npm to install all the third-party dependencies in `package.json` by running:
+After cloning the repository, use npm to install all the third-party dependencies in `package.json` by running in the main folder of the project:
 
 ```
 npm --prefix . install .
@@ -29,15 +29,17 @@ To download the corpus used in the artifact evaluation (ECMAScript), run the fol
 
 ```
 cd Dataset
-git clone https://github.com/nodejs/node/tree/e46c680bf2b211bbd52cf959ca17ee98c7f657f5
+git clone https://github.com/nodejs/node/
+git reset --hard e46c680bf2b211bbd52cf959ca17ee98c7f657f5
+cd ..
 ```
 
 ## Usage
 
-To run SandDriller, execute: 
+To run SandDriller, execute from the main folder of the project: 
 
 ```
-node ${PATH_TO_PROJECT}/test/run-multi-proc.js
+node test/run-multi-proc.js
 ```
 
 A summary of the test results will be printed on the screen and the detailed results can be inspected in `$PATH_TO_SANDDRILLER/Results/`. For each security violation, SandDriller outputs the offending instrumented test cases in the `/tmp/res` folder.
@@ -45,8 +47,7 @@ A summary of the test results will be printed on the screen and the detailed res
 ## Configuration options
 There are several configuration options that can be tweaked to control SandDriller's execution:
 
-* **Target sandbox**: Edit `${PATH_TO_PROJECT}/test/process-runner.js` , line 10 with the sandbox name to test 
-example: 
+* **Target sandbox**: Edit `${PATH_TO_PROJECT}/test/process-runner.js` , line 10 with the name of the sandbox under test, e.g.,: 
 ```js 
 const sandbox = "realms-shim"; //sandbox names: ["realms-shim", "safe-eval", "vm2", "ses", "near-membrane", "adsafe", "caja"]
 ```
