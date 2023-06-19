@@ -54,11 +54,11 @@ const sandbox = "realms-shim"; //sandbox names: ["realms-shim", "safe-eval", "vm
 
 * **Corpus**: The variable `entries` declared in line 132 of `${PATH_TO_PROJECT}/test/run-multi-proc.js` should contain the input corpus used by SandDriller. One can either declare it using individual paths: 
 ```js
-entries = ['../Dataset/V8/regress/regress-444805.js-script']
+entries = [path.resolve(__dirname, "../Dataset/V8/regress/regress-444805.js-script")]
 ```
 or by using the convenient `walk()` method to include all files in a directory tree: 
 ```js
-entries = walk("../Dataset/node/deps/v8/test/mjsunit");
+entries = walk(path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit"));
 ```
 
 * **Number of parallel worker threads**: Edit `${PATH_TO_PROJECT}/test/run-multi-proc.js` , line 12 to change the pool size (default 16) example: 
