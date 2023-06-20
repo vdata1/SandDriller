@@ -132,13 +132,13 @@ const walk = function(dir) {
     let entries = [];
 
     /* For basic test */
-    //entries = walk(path.resolve(__dirname, "../Dataset/toy-corpus"));
+    entries = walk(path.resolve(__dirname, "../Dataset/toy-corpus"));
 
     /* For E1 */ 
     //entries = [path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit/regress/regress-746909.js")]
     
     /* For E2 */
-    entries = [path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit/array-push2.js")]
+    //entries = [path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit/array-push2.js")]
 
     /* For E3 */
     //entries = walk(path.resolve(__dirname, "../Dataset/node/deps/v8/test/mjsunit"));

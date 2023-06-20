@@ -8,7 +8,7 @@ const base = require("./BaseFunctions.js");
 const { CONNREFUSED } = require("dns");
 
 const sandbox = "vm2";
-const useGenerator = false; //change to 'true' if you want to use varient generator
+const useGenerator = false; //Change to 'true' to enable the generator.
 const maxVariants = 5;
 
 process
@@ -150,7 +150,7 @@ function startWithSandbox(sb) {
                         },
 
                         //########### BASE FUNCTIONS ###########
-
+/*
                           $DONE : base.$DONE,
                           assert : base.assert,
                           $ERROR : base.$ERROR,
@@ -239,7 +239,7 @@ function startWithSandbox(sb) {
                           testWithAtomicsFriendlyTypedArrayConstructors : base.testWithAtomicsFriendlyTypedArrayConstructors,
                           testWithNonAtomicsFriendlyTypedArrayConstructors : base.testWithNonAtomicsFriendlyTypedArrayConstructors,
 
-
+*/
                     };
                     if (sandbox === "vm2") {
                         
