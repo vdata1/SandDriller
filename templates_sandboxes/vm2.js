@@ -1,9 +1,14 @@
-let code = `
-    //YOUR CODE HERE;
-`;
+const fs = require("fs"), path = require("path");
+let code = fs.readFileSync(path.resolve(__dirname, "./exploit.js")).toString();
 
+console.log("Prototype before:");
+console.log(Object.prototype);
 
 const {VM} = require("vm2");
-let vmInstance = new VM();
-vmInstance.run(code);
-console.log(Object.prototype.p, {}.polluted, Object.prototype.FEA, Object.prototype.FET, Object.prototype.FIA, Object.prototype.FIT, Object.prototype.CCA, Object.prototype.CCT);
+let vmInstance = new VM({sandbox: {stats: {}}});
+try {
+	vmInstance.run(code);
+} catch (e) {}
+
+console.log("Prototype after:")
+console.log(Object.prototype);
