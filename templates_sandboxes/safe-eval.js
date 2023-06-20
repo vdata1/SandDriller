@@ -1,13 +1,12 @@
-let code = `
+const fs = require("fs"), path = require("path");
+let code = fs.readFileSync(path.resolve(__dirname, "./exploit.js")).toString(); // put your exploit in this file
 
-//YOUR CODE HERE; 
+console.log("Prototype before:");
+console.log(Object.prototype);
 
-`;
-
-
-let leak = console.log;
-let endows = {leak:leak}
+let endows = {leak:()=>{}, stats:{}}
 let safeEval = require("safe-eval");
 safeEval("1;" + code, endows);
-console.log("Done");
-console.log(Object.prototype.p, {}.polluted, Object.prototype.FEA, Object.prototype.FET, Object.prototype.FIA, Object.prototype.FIT, Object.prototype.CCA, Object.prototype.CCT);
+
+console.log("Prototype after:");
+console.log(Object.prototype);

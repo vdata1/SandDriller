@@ -1,5 +1,5 @@
 const fs = require("fs"), path = require("path");
-let code = fs.readFileSync(path.resolve(__dirname, "./exploit.js")).toString();
+let code = fs.readFileSync(path.resolve(__dirname, "./exploit.js")).toString(); // put your exploit in this file
 
 console.log("Prototype before:");
 console.log(Object.prototype);
